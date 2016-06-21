@@ -1,5 +1,5 @@
 {
-  "name": "arc-gis-tets",
+  "name": "arc-gis-test",
   "version": "0.0.1",
   "devDependencies": {
     "angular": "~1.5.7"

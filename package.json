@@ -1,0 +1,10 @@
+{
+  "name": "arc-gis-test",
+  "version": "0.0.1",
+  "description": "arc-gis-test",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-livereload": "^3.8.1"
+  }
+}
