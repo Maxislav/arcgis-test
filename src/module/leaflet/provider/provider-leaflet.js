@@ -8,18 +8,29 @@
         .module('leaflet')
         .provider('l', function(){
 
-            var width = null;
-            var height= null;
+            var width = null,
+                height = null,
+                srcLib = {
+                    js: null,
+                    css: null
+                };
+
             return{
                 $get: function(){
                     return {
                         width: width,
-                        height: height
+                        height: height,
+                        srcLib: srcLib
                     }
                 },
                 setMapSize: function(obj){
                     width = obj.width || width;
                     height = obj.height || height;
+                    return this;
+                },
+                setSrcLib: function(src){
+                    srcLib.js = src.js;
+                    srcLib.css = src.css;
                 }
 
             }

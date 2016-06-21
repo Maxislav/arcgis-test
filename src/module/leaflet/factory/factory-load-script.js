@@ -5,9 +5,9 @@
     angular.module('leaflet')
         .factory('factoryLoadScript', factoryLoadScript)
 
-    factoryLoadScript.$inject = ['$http', '$q'];
+    factoryLoadScript.$inject = ['$http', '$q', 'l'];
 
-    function factoryLoadScript($http, $q) {
+    function factoryLoadScript($http, $q, l) {
         var defer = null;
 
         return {
@@ -24,8 +24,16 @@
         function create(){
             var link = document.createElement('link');
             link.rel= "stylesheet";
-            link.href = '../src/lib/leaflet/leaflet.css';
-            document.head.appendChild(link)
+            link.href = l.srcLib.css;
+            document.head.appendChild(link);
+
+            var script = document.createElement('script');
+            script.onload = function(){
+                defer.resolve();
+            };
+            script.src = l.srcLib.js;
+            document.head.appendChild(script);
+
         }
     }
 }());

@@ -1,14 +1,19 @@
 /**
  * Created by Администратор on 6/21/16.
  */
-(function(){
+(function () {
 
     angular.module('app')
-        .config(function(lProvider){
-            lProvider.setMapSize({
-                width: '600px',
-                height: '480px'
-            })
+        .config(function (lProvider) {
+            lProvider
+                .setMapSize({
+                    width: '600px',
+                    height: '480px'
+                })
+                .setSrcLib({
+                    css: '../src/lib/leaflet/leaflet.css',
+                    js: '../src/lib/leaflet/leaflet-src.js'
+                })
         })
 
 }());
