@@ -23,7 +23,7 @@
         }
         function create(){
             var link = document.createElement('link');
-            link.rel= "stylesheet"
+            link.rel= "stylesheet";
             link.href = '../src/lib/leaflet/leaflet.css';
             document.head.appendChild(link)
         }

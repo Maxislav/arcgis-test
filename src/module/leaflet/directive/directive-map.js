@@ -7,19 +7,24 @@
     angular.module('leaflet')
         .directive('lfMap', lfMap);
 
-    lfMap.$inject = ['factoryLoadScript'];
-    function lfMap(factoryLoadScript){
-
-
-
-
+    lfMap.$inject = ['factoryLoadScript', 'l'];
+    function lfMap(factoryLoadScript, l){
         return {
             restrict: 'A',
-            controller: function(){
-
+            controller: function(l){
+                var _el = null;
+                this.init = function(el){
+                    _el = el;
+                    setSize();
+                };
+                function setSize(){
+                    _el[0].style.width = l.width;
+                    _el[0].style.height = l.height;
+                };
             },
             link: function(scope, el, attr, cntrl){
-                factoryLoadScript.load()
+                factoryLoadScript.load();
+                cntrl.init(el);
             }
         }
     }

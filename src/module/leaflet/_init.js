@@ -3,6 +3,5 @@
  */
 (function(){
     "use strict";
-
     angular.module('leaflet',[])
 }());
