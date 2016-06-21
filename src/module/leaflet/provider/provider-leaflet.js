@@ -13,6 +13,10 @@
                 srcLib = {
                     js: null,
                     css: null
+                },
+                startCenter = {
+                    lat: null,
+                    lng: null
                 };
 
             return{
@@ -20,7 +24,8 @@
                     return {
                         width: width,
                         height: height,
-                        srcLib: srcLib
+                        srcLib: srcLib,
+                        startCenter: startCenter
                     }
                 },
                 setMapSize: function(obj){
@@ -31,8 +36,12 @@
                 setSrcLib: function(src){
                     srcLib.js = src.js;
                     srcLib.css = src.css;
+                    return this;
+                },
+                setStartCenter: function(position){
+                    startCenter.lat = position.lat;
+                    startCenter.lng = position.lng;
                 }
-
             }
         })
 }());

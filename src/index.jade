@@ -4,11 +4,7 @@ html(lang='en', ng-app="app")
         meta(charset='UTF-8')
         title arc-gis-test
 
-        //link(rel="stylesheet", href="https://js.arcgis.com/4.0/esri/css/main.css")
-
-        // script(src="../src/lib/leaflet/leaflet.js")
         script(src="../bower_components/angular/angular.js")
-
         script(src="../src/module/leaflet/_init.js")
         script(src="../src/module/leaflet/provider/provider-leaflet.js")
         script(src="../src/module/leaflet/directive/directive-map.js")
@@ -19,6 +15,10 @@ html(lang='en', ng-app="app")
 
 
     body
-        div(lf-map)
+        .map-container
+            div(style="margin:0 auto")
+                .lf-map
+                .info-lat-lng
+
 
 

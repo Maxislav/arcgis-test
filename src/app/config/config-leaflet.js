@@ -6,14 +6,19 @@
     angular.module('app')
         .config(function (lProvider) {
             lProvider
-                .setMapSize({
-                    width: '600px',
-                    height: '480px'
-                })
                 .setSrcLib({
                     css: '../src/lib/leaflet/leaflet.css',
                     js: '../src/lib/leaflet/leaflet-src.js'
                 })
+                .setMapSize({
+                    width: '600px',
+                    height: '480px'
+                })
+                .setStartCenter({
+                    lat: 50.1,
+                    lng: 31.4
+                })
+
         })
 
 }());

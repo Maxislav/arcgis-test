@@ -10,7 +10,7 @@
     lfMap.$inject = ['factoryLoadScript', 'l'];
     function lfMap(factoryLoadScript, l){
         return {
-            restrict: 'A',
+            restrict: 'AC',
             controller: function(l){
                 var _el = null;
                 this.init = function(el){
@@ -23,7 +23,7 @@
                 };
 
                 this.setMap = function (){
-                    var mymap = L.map(_el[0]).setView([51.505, -0.09], 13);
+                    var mymap = L.map(_el[0]).setView([l.startCenter.lat, l.startCenter.lng], 6);
 
                     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
                         maxZoom: 18,
