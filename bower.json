@@ -1,0 +1,7 @@
+{
+  "name": "arc-gis-tets",
+  "version": "0.0.1",
+  "devDependencies": {
+    "angular": "~1.5.7"
+  }
+}
