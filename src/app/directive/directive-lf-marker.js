@@ -14,6 +14,7 @@
             link: function(scope, el, attr){
                 scope.clickMarker = function(position){
                     factoryMarker.setActive(scope);
+                    scope.drawPoly()
                 }
             }
         }

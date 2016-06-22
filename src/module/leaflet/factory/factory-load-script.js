@@ -28,9 +28,14 @@
             document.head.appendChild(link);
 
             var script = document.createElement('script');
-            script.onload = function(){
+            var scriptLabel = document.createElement('script');
+            scriptLabel.onload = function(){
                 defer.resolve();
             };
+            script.onload = function(){
+                document.head.appendChild(scriptLabel);
+            };
+            scriptLabel.src = 'src/lib/leaflet/leaflet.label.js';
             script.src = l.srcLib.js;
             document.head.appendChild(script);
 

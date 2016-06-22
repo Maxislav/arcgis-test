@@ -9,12 +9,16 @@
     controllerMain.$inject = ['$scope','factoryMarker'];
 
     function controllerMain( $scope, factoryMarker) {
-
+        var map = null;
+        var arrPosition = null;
 
         var scope = this;
 
         factoryMarker.getMarkerPosition()
             .then(function (d) {
+                arrPosition = d[0];
+                map = d[1];
+                matOnClick();
                 setMarkers.apply(scope, d);
             });
 
@@ -25,10 +29,23 @@
                 var marker = L.marker(arr[i], {icon: icon});
                 marker.addTo(map)
             }
+        }
 
+        function drawPoly(){
 
         }
 
+        $scope.drawPoly = function(){
+          var poly =   L.polyline(arrPosition).bindLabel('Even polylines can have labels.').addTo(map)
+            poly
+        };
 
+        function matOnClick(){
+            map.on('click', function(e){
+                if(!angular.element(e.originalEvent.toElement).hasClass('arc')){
+                    factoryMarker.reset()
+                }
+            })
+        }
     }
 }());

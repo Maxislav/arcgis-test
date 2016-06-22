@@ -9,13 +9,14 @@
 
     factoryMarker.$inject = ['$timeout', '$q', 'factoryLeafletMap', '$compile'];
     function factoryMarker($timeout, $q, factoryLeafletMap, $compile){
-        var arrMarker = [];
+        var arrIcon = [];
 
         return {
             getMarkerPosition: getMarkerPosition, //promise.all [arr, map]
             iconCreate: iconCreate, //L.icon
-            arrMarker: arrMarker, //L.icon
-            setActive: setActive //L.icon
+            setActive: setActive, //L.icon
+            arrIcon: arrIcon,
+            reset: reset //foo
         };
 
         function getMarkerPosition(){
@@ -47,7 +48,7 @@
                 iconSize: L.point(50, 50)
             });
 
-            arrMarker.push({
+            arrIcon.push({
                 position: position,
                 icon: icon,
                 scope: _scope
@@ -58,16 +59,25 @@
         }
         function setActive(scope){
             var i = 0;
-            while(i<arrMarker.length){
-                if(arrMarker[i].scope == scope){
-                    arrMarker[i].scope.cssClass = 'active'
+            while(i<arrIcon.length){
+                if(arrIcon[i].scope == scope){
+                    arrIcon[i].scope.cssClass = 'active'
                 }else{
-                    arrMarker[i].scope.cssClass = null;
+                    arrIcon[i].scope.cssClass = null;
                 }
                 i++;
             }
             i = null;
         }
 
+        function reset(){
+            var i = 0;
+
+            while(i<arrIcon.length){
+                arrIcon[i].scope.cssClass = null;
+                i++;
+            }
+            i = null;
+        }
     }
 }());
