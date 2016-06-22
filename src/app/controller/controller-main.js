@@ -6,9 +6,9 @@
 
     angular.module('app')
         .controller('controllerMain', controllerMain);
-    controllerMain.$inject = ['factoryLeafletMap', 'factoryMarker'];
+    controllerMain.$inject = ['$scope','factoryMarker'];
 
-    function controllerMain(factoryLeafletMap, factoryMarker) {
+    function controllerMain( $scope, factoryMarker) {
 
 
         var scope = this;
@@ -21,13 +21,14 @@
         function setMarkers(arr, map) {
 
             for (var i = 0; i < arr.length; i++) {
-                var icon = factoryMarker.iconCreate();
-
+                var icon = factoryMarker.iconCreate($scope,arr[i]);
                 var marker = L.marker(arr[i], {icon: icon});
                 marker.addTo(map)
             }
 
 
         }
+
+
     }
 }());

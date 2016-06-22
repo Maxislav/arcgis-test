@@ -45,11 +45,19 @@ body{
       transition: all 0.2s;
       border: 1px solid gray;
       animation-iteration-count:infinite;
-      &:hover{
+      &:hover:not(.active){
         animation-iteration-count:infinite;
-        background: red;
+       // background: red;
         animation: scale 0.3s infinite linear;
         -webkit-animation: scale 0.3s  infinite linear;
+      }
+      &.active{
+        background: red;
+        -webkit-transform: scale(1.2, 1.2);
+        &:hover{
+          animation: scale 0.3s infinite linear;
+          -webkit-animation: scale 0.3s  infinite linear;
+        }
       }
     }
   }

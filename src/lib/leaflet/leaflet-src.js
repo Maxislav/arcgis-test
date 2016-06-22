@@ -5751,7 +5751,10 @@ L.DivIcon = L.Icon.extend({
 		var div = (oldIcon && oldIcon.tagName === 'DIV') ? oldIcon : document.createElement('div'),
 		    options = this.options;
 
-		div.innerHTML = options.html !== false ? options.html : '';
+		//div.innerHTML = options.html !== false ? options.html : '';
+        if(options.html){
+            div.appendChild(options.html)
+        }
 
 		if (options.bgPos) {
 			var bgPos = L.point(options.bgPos);
@@ -12424,4 +12427,3 @@ L.Map.include({
 
 
 }(window, document));
-//# sourceMappingURL=leaflet-src.map
