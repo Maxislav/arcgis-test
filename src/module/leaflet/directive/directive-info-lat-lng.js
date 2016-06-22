@@ -7,12 +7,15 @@
     angular.module('leaflet')
         .directive('infoLatLng', infoLatLng)
 
-    function infoLatLng(){
+    infoLatLng.$inject =['factoryMapEvents'];
+    function infoLatLng(factoryMapEvents){
         return {
             restrict: 'AC',
             templateUrl: 'src/module/leaflet/template/info-lat-lng.html',
-            link: function(scope, el, attr){
-
+            require: '^mapContainer',
+            link: function(scope, el, attr, cntrl){
+                factoryMapEvents.initMoveEvent(cntrl.getScope());
+                scope.position = factoryMapEvents.mousePosition
             }
         }
     }

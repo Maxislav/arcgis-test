@@ -6,10 +6,19 @@ body{
 .map-container{
   margin: 0 auto;
   position: relative;
+  .lf-map{
+    z-index: 0;
+  }
+
   .info-lat-lng{
     position: absolute;
     left: 0;
     bottom: 0;
-    color: red;
+    color: #a9e2ff;
+    text-shadow: 0 0 2px black, 0 0 2px black;
+    z-index: 1;
+    .lat-lng-container>*{
+      margin: 5px;
+    }
   }
 }

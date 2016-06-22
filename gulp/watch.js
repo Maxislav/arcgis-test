@@ -9,7 +9,7 @@ module.exports = function(gulp){
     gulp.task('watch', function () {
         livereload.listen();
         gulp
-            .watch('./src/*.jade', ['templates']);
+            .watch('./src/**/*.jade', ['templates']);
 
 
         gulp
