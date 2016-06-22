@@ -6,30 +6,12 @@
     angular.module('leaflet')
         .directive('mapContainer', mapContainer)
 
-    mapContainer.$inject = ['l', 'factoryLoadScript', 'factoryLeafletMap'];
-    function mapContainer(l, factoryLoadScript, factoryLeafletMap) {
+    mapContainer.$inject = [];
+
+    function mapContainer() {
         return {
             restrict: 'AC',
-            controller: function ($scope) {
-                var mapEl = null;
-                var myMap = null;
-
-                this.setSize = function (el) {
-                    el[0].style.width = l.width;
-                    el[0].style.height = l.height;
-                };
-
-                this.setMap = function (el) {
-                    factoryLeafletMap.initMap(el)
-                };
-
-                this.getScope = function(){
-                    return $scope;
-                }
-
-
-
-            },
+            controller: 'controllerMapContainer',
             link: function (scope, el, attr, cntrl) {
                 cntrl.setSize(el)
             }
