@@ -10,6 +10,7 @@
 
             var width = null,
                 height = null,
+
                 srcLib = {
                     js: null,
                     css: null
@@ -22,10 +23,10 @@
             return{
                 $get: function(){
                     return {
-                        width: width,
+                        startCenter: startCenter,
                         height: height,
                         srcLib: srcLib,
-                        startCenter: startCenter
+                        width: width
                     }
                 },
                 setMapSize: function(obj){

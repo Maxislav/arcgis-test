@@ -24,14 +24,7 @@
                     scope.$digest()
                 });
 
-                var myIcon = L.divIcon({
-                    className: 'my-div-icon',
-                    html: '<duv class="table"><div class="table-cell"><div ><div class="arc"></div></div></div></duv>',
-                    iconSize: L.point(50, 50)
-                });
 
-                var marker = L.marker([50.25, 32.33], {icon: myIcon})
-                marker.addTo(map)
 
             })
         }
