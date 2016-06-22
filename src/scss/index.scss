@@ -55,8 +55,9 @@ body{
         background: red;
         -webkit-transform: scale(1.2, 1.2);
         &:hover{
-          animation: scale 0.3s infinite linear;
-          -webkit-animation: scale 0.3s  infinite linear;
+          //todo при наведении на выеленный маркер
+          //animation: scale 0.3s infinite linear;
+         // -webkit-animation: scale 0.3s  infinite linear;
         }
       }
     }
