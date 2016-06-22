@@ -4,22 +4,27 @@ html(lang='en', ng-app="app")
         meta(charset='UTF-8')
         title arc-gis-test
 
-        link(data-css-type='custom-theme', rel='stylesheet' href='../build/css/index.css')
 
-        script(src="../bower_components/angular/angular.js")
-        script(src="../src/module/leaflet/_init.js")
-        script(src="../src/module/leaflet/provider/provider-leaflet.js")
-        script(src="../src/module/leaflet/directive/directive-map.js")
-        script(src="../src/module/leaflet/factory/factory-load-script.js")
+        //- inject:css
+        link(data-css-type='custom-theme', rel='stylesheet' href='build/css/index.css')
+        //- endinject
 
-        script(src="app/_init.js")
-        script(src="app/config/config-leaflet.js")
+
+        //- inject:js
+        script(src="bower_components/angular/angular.js")
+        script(src="src/app/_init.js")
+        script(src="src/module/leaflet/_init.js")
+        script(src="src/app/config/config-leaflet.js")
+        script(src="src/module/leaflet/directive/directive-info-lat-lng.js")
+        script(src="src/module/leaflet/directive/directive-map-container.js")
+        script(src="src/module/leaflet/directive/directive-map.js")
+        script(src="src/module/leaflet/factory/factory-load-script.js")
+        script(src="src/module/leaflet/factory/factrory-leaflet-map.js")
+        script(src="src/module/leaflet/provider/provider-leaflet.js")
+        //- endinject
 
 
     body
         .map-container
             .lf-map
             .info-lat-lng
-
-
-

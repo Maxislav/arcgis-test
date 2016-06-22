@@ -7,8 +7,8 @@
         .config(function (lProvider) {
             lProvider
                 .setSrcLib({
-                    css: '../src/lib/leaflet/leaflet.css',
-                    js: '../src/lib/leaflet/leaflet-src.js'
+                    css: 'src/lib/leaflet/leaflet.css',
+                    js: 'src/lib/leaflet/leaflet-src.js'
                 })
                 .setMapSize({
                     width: '600px',
