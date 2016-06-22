@@ -4,6 +4,8 @@ html(lang='en', ng-app="app")
         meta(charset='UTF-8')
         title arc-gis-test
 
+        link(data-css-type='custom-theme', rel='stylesheet' href='../build/css/index.css')
+
         script(src="../bower_components/angular/angular.js")
         script(src="../src/module/leaflet/_init.js")
         script(src="../src/module/leaflet/provider/provider-leaflet.js")
@@ -16,9 +18,8 @@ html(lang='en', ng-app="app")
 
     body
         .map-container
-            div(style="margin:0 auto")
-                .lf-map
-                .info-lat-lng
+            .lf-map
+            .info-lat-lng
 
 
 

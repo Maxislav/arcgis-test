@@ -2,28 +2,22 @@
  * Created by mars on 6/21/16.
  */
 
-const gulp = require('gulp'),
-    jade = require('gulp-jade'),
-    livereload = require('gulp-livereload');
+const gulp = require('gulp');
+
+/**
+ * Сборка jade
+ */
+require('./gulp/templates.js')(gulp);
+
+/**
+ * Слежение за изменениями
+ */
+require('./gulp/watch.js')(gulp);
 
 
-gulp.task('templates', function () {
-    var YOUR_LOCALS = {};
+require('./gulp/sass.js')(gulp);
 
-    return gulp.src('./src/*.jade')
-        .pipe(jade({
-            locals: YOUR_LOCALS,
-            pretty: true
-        }))
-        .pipe(gulp.dest('./src/'))
-        .pipe( livereload() )
-});
 
-gulp.task('watch', function () {
-    livereload.listen();
-    gulp.watch('./src/*.jade', ['templates']);
-});
-
-gulp.task('default', ['templates'], function(){
+gulp.task('default', ['templates', 'sass'], function(){
     gulp.start('watch')
 });
