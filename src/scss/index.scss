@@ -14,11 +14,40 @@ body{
     position: absolute;
     left: 0;
     bottom: 0;
-    color: #a9e2ff;
+    min-width: 200px;
+    color: #ccc7c7;
+    background: linear-gradient(to right, rgba(255,255,255,0.8) 0%,rgba(255,255,255,0.8) 60%,rgba(255,255,255,0) 100%);
     text-shadow: 0 0 2px black, 0 0 2px black;
     z-index: 1;
     .lat-lng-container>*{
       margin: 5px;
+    }
+  }
+}
+.table{
+  display: table;
+  width: 100%;
+  height: 100%;
+  .table-cell{
+    width: 100%;
+    vertical-align: middle;
+    display: table-cell;
+  }
+}
+.leaflet-marker-pane{
+  .my-div-icon{
+    .arc{
+      margin: 0 auto;
+      width: 30px;
+      height: 30px;
+      background: yellow;
+      border-radius: 50%;
+      transition: all 0.2s;
+      border: 1px solid gray;
+      &:hover{
+        background: red;
+        transform: scale(1.5, 1.5);
+      }
     }
   }
 }
