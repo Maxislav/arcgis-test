@@ -6,14 +6,16 @@
     angular.module('leaflet')
         .directive('mapContainer', mapContainer)
 
-    mapContainer.$inject = [];
+    mapContainer.$inject = ['l'];
 
-    function mapContainer() {
+    function mapContainer(l) {
         return {
             restrict: 'AC',
             controller: 'controllerMapContainer',
             link: function (scope, el, attr, cntrl) {
-                cntrl.setSize(el)
+                el[0].style.width = l.width;
+                el[0].style.height = l.height;
+
             }
         }
     }

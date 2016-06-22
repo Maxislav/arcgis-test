@@ -22,7 +22,7 @@
                     mousePosition.lat = e.latlng.lat;
                     mousePosition.lng = e.latlng.lng;
                     scope.$digest()
-                })
+                });
 
                 var myIcon = L.divIcon({
                     className: 'my-div-icon',
