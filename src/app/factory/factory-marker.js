@@ -34,10 +34,22 @@
                      * Имитация подгрузки координат с сервера
                      */
                     var response = [
-                        [49, 26],
-                        [50, 29],
-                        [48, 34],
-                        [50, 33]
+                        {
+                            name: 'Lviv',
+                            latLng :   [49, 26]
+                        },
+                        {
+                            name: 'Kiev',
+                            latLng: [50, 29]
+                        },
+                        {
+                            name: 'Harkov',
+                            latLng: [48, 34]
+                        },
+                        {
+                            name: 'Zaporozhie',
+                            latLng: [50, 33]
+                        }
                     ];
                     for(var i=0; i<response.length; i++){
                         arrMarkerOption.push(response[i])
@@ -59,31 +71,42 @@
             arrPoly.length = 0;
         }
 
-        function getPoly(position){
+        function getPoly(scope){
             removePoly();
             angular.forEach(arrMarker, function(marker){
-                if(marker.position!=position){
-                    arrPoly.push(  L.polyline([ position, marker.position ], {snakingSpeed: 1000}).bindLabel('Even polylines can have labels.')      ) ;
+                if(marker.scope!=scope){
+                    arrPoly.push(  L.polyline([ scope.position, marker.position ], {snakingSpeed: 1000}).bindLabel(scope.name+"->"+marker.scope.name)      ) ;
                 }
             });
             return arrPoly;
         }
 
-        function getMarker(scope, arrPosition){
+        function getMarker(scope, arrOts){
 
-            angular.forEach(arrPosition, function(position){
+            angular.forEach(arrOts, function(opt){
                 var _scope  = scope.$new();
-                var icon = iconCreate(_scope, position);
+                _scope.name = opt.name;
+                var icon = iconCreate(_scope, opt.latLng);
 
-                var marker = L.marker(position, {icon: icon});
+                var marker = L.marker(opt.latLng, {icon: icon});
+                marker.bindPopup(markerPopupCreate(_scope));
 
                 //todo лабел у маркеров
                 //marker.bindLabel('<p>A sweet static label!</p>', { direction: 'top' });
-                marker.position = position;
+                marker.position = opt.latLng;
                 marker.scope = _scope;
                 arrMarker.push(marker);
             });
             return arrMarker
+        }
+
+        function markerPopupCreate(_scope){
+
+            var template = '<div>{{name}}</div>'
+            var linkFn = $compile(template);
+            var content = linkFn(_scope);
+            return content[0]
+
         }
 
 
@@ -98,7 +121,7 @@
             var icon = L.divIcon({
                 className: 'my-div-icon',
                 html: content[0],
-                iconSize: L.point(50, 50)
+                iconSize: L.point(25, 25)
             });
             return icon;
         }

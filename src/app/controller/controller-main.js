@@ -33,12 +33,10 @@
 
         }
 
-        $scope.drawPoly = function(position){
-
-            angular.forEach(factoryMarker.getPoly(position), function(poly){
+        $scope.drawPoly = function(scope){
+            angular.forEach(factoryMarker.getPoly(scope), function(poly){
                 poly.addTo(map).snakeIn()
             });
-
         };
 
         function matOnClick(){

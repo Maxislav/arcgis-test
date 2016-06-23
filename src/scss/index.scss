@@ -38,8 +38,8 @@ body{
   .my-div-icon{
     .arc{
       margin: 0 auto;
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
       background: yellow;
       border-radius: 50%;
       transition: all 0.2s;
@@ -47,7 +47,6 @@ body{
       animation-iteration-count:infinite;
       &:hover:not(.active){
         animation-iteration-count:infinite;
-       // background: red;
         animation: scale 0.3s infinite linear;
         -webkit-animation: scale 0.3s  infinite linear;
       }
@@ -57,7 +56,7 @@ body{
         &:hover{
           //todo при наведении на выеленный маркер
           //animation: scale 0.3s infinite linear;
-         // -webkit-animation: scale 0.3s  infinite linear;
+          // -webkit-animation: scale 0.3s  infinite linear;
         }
       }
     }
