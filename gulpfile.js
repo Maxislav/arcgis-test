@@ -25,11 +25,14 @@ require('./gulp/sass.js')(gulp);
  */
 require('./gulp/inject.js')(gulp);
 
+/**
+ * копирование
+ */
+require('./gulp/file-copy.js')(gulp);
 
-/*gulp.task('default', ['templates', 'sass'], function(){
-    gulp.start('watch')
-});*/
+
 gulp.task('default', gulpsync.sync([
+    'copy',
     'inject:dev',
     [
         'templates',

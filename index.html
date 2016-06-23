@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="UTF-8">
+    <title>arc-gis-test</title>
+    <link data-css-type="custom-theme" rel="stylesheet" href="build/css/index.css">
+    
+    <script src="src/lib/angular/angular.min.js"></script>
+    <script src="src/app/_init.js"></script>
+    <script src="src/module/leaflet/_init.js"></script>
+    <script src="src/app/config/config-leaflet.js"></script>
+    <script src="src/app/controller/controller-main.js"></script>
+    <script src="src/app/directive/directive-lf-marker.js"></script>
+    <script src="src/app/factory/factory-marker.js"></script>
+    <script src="src/app/factory/factory-poly.js"></script>
+    <script src="src/module/leaflet/controller/conroller-map-container.js"></script>
+    <script src="src/module/leaflet/directive/directive-info-lat-lng.js"></script>
+    <script src="src/module/leaflet/directive/directive-map-container.js"></script>
+    <script src="src/module/leaflet/directive/directive-map.js"></script>
+    <script src="src/module/leaflet/factory/factory-load-script.js"></script>
+    <script src="src/module/leaflet/factory/factory-map-events.js"></script>
+    <script src="src/module/leaflet/factory/factrory-leaflet-map.js"></script>
+    <script src="src/module/leaflet/provider/provider-leaflet.js"></script>
+    
+  </head>
+  <body ng-controller="controllerMain">
+    <div class="map-container">
+      <div class="lf-map"></div>
+      <div class="info-lat-lng"></div>
+    </div>
+  </body>
+</html>

@@ -4,12 +4,10 @@
 const inject = require( 'gulp-inject' );
 
 const srcDev = [
-    'bower_components/angular/angular.js',
-
+    '!src/lib/**/!(angular.min.js)',
+    'src/lib/angular/angular.min.js',
     'src/**/*/_*.js',
     'src/**/*/*.js',
-    '!src/lib/**/*',
-
     'build/css/index.css'
 
 ];
