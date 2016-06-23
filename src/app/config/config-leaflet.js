@@ -16,7 +16,7 @@
                 })
                 .setStartCenter({
                     lat: 50.1,
-                    lng: 31.4
+                    lng: 30.2
                 })
 
         })

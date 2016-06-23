@@ -36,19 +36,19 @@
                     var response = [
                         {
                             name: 'Lviv',
-                            latLng :   [49, 26]
+                            latLng :   [49.8, 24.00]
                         },
                         {
                             name: 'Kiev',
-                            latLng: [50, 29]
+                            latLng: [50.5, 30.5]
                         },
                         {
                             name: 'Harkov',
-                            latLng: [48, 34]
+                            latLng: [50.2, 36]
                         },
                         {
                             name: 'Zaporozhie',
-                            latLng: [50, 33]
+                            latLng: [47.8, 35.2]
                         }
                     ];
                     for(var i=0; i<response.length; i++){
@@ -75,7 +75,7 @@
             removePoly();
             angular.forEach(arrMarker, function(marker){
                 if(marker.scope!=scope){
-                    arrPoly.push(  L.polyline([ scope.position, marker.position ], {snakingSpeed: 1000}).bindLabel(scope.name+"->"+marker.scope.name)      ) ;
+                    arrPoly.push(  L.polyline([ scope.position, marker.position ], {snakingSpeed: 1000}).bindLabel(scope.name+" -> "+marker.scope.name)      ) ;
                 }
             });
             return arrPoly;
