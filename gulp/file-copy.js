@@ -1,7 +1,6 @@
 /**
  * Created by mars on 6/23/16.
  */
-const gulpCopy = require('gulp-file-copy');
 
 module.exports = function(gulp){
     gulp.task('copy', function() {

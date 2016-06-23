@@ -27,6 +27,11 @@
             link.href = l.srcLib.css;
             document.head.appendChild(link);
 
+            var linkLabel = document.createElement('link');
+            linkLabel.rel= "stylesheet";
+            linkLabel.href = 'src/lib/leaflet/leaflet.label.css';
+            document.head.appendChild(linkLabel);
+
             var script = document.createElement('script');
             var scriptLabel = document.createElement('script');
             scriptLabel.onload = function(){

@@ -6,6 +6,7 @@
 
     angular.module('app')
         .controller('controllerMain', controllerMain);
+
     controllerMain.$inject = ['$scope','factoryMarker'];
 
     function controllerMain( $scope, factoryMarker) {
@@ -35,9 +36,12 @@
 
         }
 
-        $scope.drawPoly = function(){
-          var poly =   L.polyline(arrPosition).bindLabel('Even polylines can have labels.').addTo(map)
-            poly
+        $scope.drawPoly = function(position){
+
+            angular.forEach(factoryMarker.getPoly(position), function(poly){
+                poly.addTo(map)
+            });
+
         };
 
         function matOnClick(){

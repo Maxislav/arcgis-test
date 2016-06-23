@@ -5,7 +5,7 @@
     'use strict';
 
     angular.module('app')
-        .directive('lfMarker',lfMarker );
+        .directive('lfIcon',lfMarker );
 
     lfMarker.$inject = ['factoryMarker'];
     function lfMarker(factoryMarker){
@@ -14,7 +14,7 @@
             link: function(scope, el, attr){
                 scope.clickMarker = function(position){
                     factoryMarker.setActive(scope);
-                    scope.drawPoly()
+                    scope.drawPoly(position)
                 }
             }
         }
