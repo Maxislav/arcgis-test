@@ -39,7 +39,7 @@
         $scope.drawPoly = function(position){
 
             angular.forEach(factoryMarker.getPoly(position), function(poly){
-                poly.addTo(map)
+                poly.addTo(map).snakeIn()
             });
 
         };

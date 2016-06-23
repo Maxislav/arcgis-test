@@ -9,6 +9,7 @@
 
     function factoryLoadScript($http, $q, l) {
         var defer = null;
+        var i = 0
 
         return {
             load: load
@@ -34,16 +35,37 @@
 
             var script = document.createElement('script');
             var scriptLabel = document.createElement('script');
-            scriptLabel.onload = function(){
-                defer.resolve();
+            var scriptSnakeAnim = document.createElement('script');
+
+            scriptSnakeAnim.onload = function(){
+                resolve();
             };
+
+            scriptLabel.onload = function(){
+                resolve();
+            };
+
+
+
             script.onload = function(){
                 document.head.appendChild(scriptLabel);
+                document.head.appendChild(scriptSnakeAnim);
             };
+
+            scriptSnakeAnim.src = 'src/lib/leaflet/leaflet-polyline-snake-anim.js';
             scriptLabel.src = 'src/lib/leaflet/leaflet.label.js';
             script.src = l.srcLib.js;
             document.head.appendChild(script);
 
         }
+
+        function resolve(){
+            i++;
+            if(i==2){
+                defer.resolve();
+            }
+
+        }
+
     }
 }());

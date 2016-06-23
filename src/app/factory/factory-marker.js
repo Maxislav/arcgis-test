@@ -5,7 +5,7 @@
    'use strict';
 
     angular.module('app')
-        .factory('factoryMarker',factoryMarker)
+        .factory('factoryMarker',factoryMarker);
 
     factoryMarker.$inject = ['$timeout', '$q', 'factoryLeafletMap', '$compile'];
     function factoryMarker($timeout, $q, factoryLeafletMap, $compile){
@@ -16,12 +16,12 @@
 
 
         return {
-            getMarkerPosition: getMarkerPosition, //promise.all [arr, map]
+            getMarkerPosition: getMarkerPosition, //return promise.all [arr, map]
             iconCreate: iconCreate, //return L.icon
-            setActive: setActive, //foo
+            setActive: setActive, //void
             arrIcon: arrIcon, // [L.icon, ...]
-            getPoly: getPoly, //foo
-            reset: reset //foo
+            getPoly: getPoly, //return [L.polyline, ...]
+            reset: reset // void
         };
 
         function getMarkerPosition(){
@@ -58,10 +58,9 @@
 
         function getPoly(position){
             removePoly();
-
             angular.forEach(arrMarkerOption, function(opt){
                 if(opt!=position){
-                    arrPoly.push(  L.polyline([ position, opt ]).bindLabel('Even polylines can have labels.')      ) ;
+                    arrPoly.push(  L.polyline([ position, opt ], {snakingSpeed: 1000}).bindLabel('Even polylines can have labels.')      ) ;
                 }
             });
             return arrPoly;
