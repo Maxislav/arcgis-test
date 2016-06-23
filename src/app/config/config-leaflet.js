@@ -11,8 +11,8 @@
                     js: 'src/lib/leaflet/leaflet-src.js'
                 })
                 .setMapSize({
-                    width: '600px',
-                    height: '480px'
+                    width: '1000px',
+                    height: '600px'
                 })
                 .setStartCenter({
                     lat: 50.1,

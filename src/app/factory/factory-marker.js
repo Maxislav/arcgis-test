@@ -36,18 +36,22 @@
                     var response = [
                         {
                             name: 'Lviv',
+                            cssClass:'yellow',
                             latLng :   [49.8, 24.00]
                         },
                         {
                             name: 'Kiev',
+                            cssClass:'white',
                             latLng: [50.5, 30.5]
                         },
                         {
                             name: 'Harkov',
+                            cssClass:'white',
                             latLng: [50.2, 36]
                         },
                         {
                             name: 'Zaporozhie',
+                            cssClass:'white',
                             latLng: [47.8, 35.2]
                         }
                     ];
@@ -81,32 +85,48 @@
             return arrPoly;
         }
 
-        function getMarker(scope, arrOts){
+        function getMarker(scope, arrOpts){
 
-            angular.forEach(arrOts, function(opt){
+            angular.forEach(arrOpts, function(opt){
                 var _scope  = scope.$new();
                 _scope.name = opt.name;
+                _scope.defaultCssClass = opt.cssClass;
+                _scope.position = opt.latLng;
+
                 var icon = iconCreate(_scope, opt.latLng);
 
                 var marker = L.marker(opt.latLng, {icon: icon});
-                marker.bindPopup(markerPopupCreate(_scope));
+                //todo при необзодимости показать собсвенный попап
+                //marker.bindPopup(markerPopupCreate(_scope));
 
                 //todo лабел у маркеров
                 //marker.bindLabel('<p>A sweet static label!</p>', { direction: 'top' });
                 marker.position = opt.latLng;
                 marker.scope = _scope;
+                marker.popup = getPopup(_scope);
                 arrMarker.push(marker);
             });
             return arrMarker
         }
 
-        function markerPopupCreate(_scope){
+        function markerPopupCreate(scope){
 
             var template = '<div>{{name}}</div>'
             var linkFn = $compile(template);
-            var content = linkFn(_scope);
+            var content = linkFn(scope);
             return content[0]
 
+        }
+
+        function getPopup(scope){
+            var template = '<p>{{name}}</p>';
+            var linkFn = $compile(template);
+            var content = linkFn(scope);
+
+            var popup = L.popup({keepInView: true, closeOnClick: false, autoPan: false})
+                .setLatLng(scope.position)
+                .setContent(content[0]);
+            return popup;
         }
 
 
@@ -114,7 +134,7 @@
             _scope.position = position;
             var template = '<div class="table" ng-click="clickMarker(position)" lf-icon >' +
                 '<div class="table-cell">' +
-                '<div ><div class="arc" ng-class="cssClass"></div></div>' +
+                '<div ><div class="arc {{defaultCssClass}}"  ng-class="cssClass"></div></div>' +
                 '</div></div>';
             var linkFn = $compile(template);
             var content = linkFn(_scope);
@@ -138,13 +158,15 @@
                }else{
                    marker.scope.cssClass = null
                }
+                map.addLayer(marker.popup);
            });
         }
 
         function reset(){
             removePoly();
             angular.forEach(arrMarker, function(marker){
-                marker.scope.cssClass = null
+                marker.scope.cssClass = null;
+                map.removeLayer(marker.popup)
             })
         }
     }

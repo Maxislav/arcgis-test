@@ -1,0 +1,45 @@
+
+.leaflet-marker-pane{
+  .my-div-icon{
+    .arc{
+      margin: 0 auto;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      transition: all 0.2s;
+      border: 1px solid gray;
+      animation-iteration-count:infinite;
+      &.yellow{
+        background: yellow;
+      }
+      &.white{
+        background: #ffffff;
+      }
+      &:hover:not(.active){
+        animation-iteration-count:infinite;
+        animation: scale 0.3s infinite linear;
+        -webkit-animation: scale 0.3s  infinite linear;
+      }
+      &.active{
+        background: red;
+        -webkit-transform: scale(1.2, 1.2);
+        &:hover{
+          //todo при наведении на выеленный маркер
+          //animation: scale 0.3s infinite linear;
+          // -webkit-animation: scale 0.3s  infinite linear;
+        }
+      }
+    }
+  }
+}
+@-webkit-keyframes scale{
+  0%{
+    -webkit-transform: scale(1,1);
+  }
+  30%{
+    -webkit-transform: scale(1.5, 1.5);
+  }
+  99%{
+    -webkit-transform: scale(1,1);
+  }
+}

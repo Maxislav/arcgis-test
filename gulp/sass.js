@@ -7,7 +7,7 @@ const sass = require('gulp-sass'),
 
 module.exports = function (gulp) {
     gulp.task('sass', function () {
-        return gulp.src('./src/scss/**/*.scss')
+        return gulp.src('./src/scss/index.scss')
             .pipe(sourcemaps.init())
             .pipe(sass().on('error', sass.logError))
             .pipe(sourcemaps.write())
