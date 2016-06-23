@@ -73,17 +73,17 @@
 
             angular.forEach(arrPosition, function(position){
                 var _scope  = scope.$new();
-                var icon = iconCreate(_scope, position)
-                arrMarker.push({
-                    body:  L.marker(position, {icon: icon}),
-                    icon: icon,
-                    position: position,
-                    scope: _scope
-                })
+                var icon = iconCreate(_scope, position);
+
+                var marker = L.marker(position, {icon: icon});
+
+                //todo лабел у маркеров
+                //marker.bindLabel('<p>A sweet static label!</p>', { direction: 'top' });
+                marker.position = position;
+                marker.scope = _scope;
+                arrMarker.push(marker);
             });
-
             return arrMarker
-
         }
 
 

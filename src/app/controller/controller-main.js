@@ -25,7 +25,7 @@
 
         function setMarkers(arr, map) {
             angular.forEach(factoryMarker.getMarker($scope,arr), function(marker){
-                marker.body.addTo(map)
+                marker.addTo(map)
             })
         }
 
