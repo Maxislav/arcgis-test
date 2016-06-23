@@ -19,19 +19,10 @@
             .then(function (d) {
                 arrPosition = d[0];
                 map = d[1];
-                matOnClick();
+                mamOnClick();
                 setMarkers.apply(scope, d);
             });
 
-        function setMarkers(arr, map) {
-            angular.forEach(factoryMarker.getMarker($scope,arr), function(marker){
-                marker.addTo(map)
-            })
-        }
-
-        function drawPoly(){
-
-        }
 
         $scope.drawPoly = function(scope){
             angular.forEach(factoryMarker.getPoly(scope), function(poly){
@@ -39,7 +30,13 @@
             });
         };
 
-        function matOnClick(){
+        function setMarkers(arr, map) {
+            angular.forEach(factoryMarker.getMarker($scope,arr), function(marker){
+                marker.addTo(map)
+            })
+        }
+
+        function mamOnClick(){
             map.on('click', function(e){
                 if(!angular.element(e.originalEvent.toElement).hasClass('arc')){
                     factoryMarker.reset()
