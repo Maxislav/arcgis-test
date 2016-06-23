@@ -24,12 +24,9 @@
             });
 
         function setMarkers(arr, map) {
-
-            for (var i = 0; i < arr.length; i++) {
-                var icon = factoryMarker.iconCreate($scope,arr[i]);
-                var marker = L.marker(arr[i], {icon: icon});
-                marker.addTo(map)
-            }
+            angular.forEach(factoryMarker.getMarker($scope,arr), function(marker){
+                marker.body.addTo(map)
+            })
         }
 
         function drawPoly(){

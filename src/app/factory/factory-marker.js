@@ -10,6 +10,7 @@
     factoryMarker.$inject = ['$timeout', '$q', 'factoryLeafletMap', '$compile'];
     function factoryMarker($timeout, $q, factoryLeafletMap, $compile){
         var arrIcon = [];
+        var arrMarker = [];
         var arrPoly = [];
         var arrMarkerOption = [];
         var map = null;
@@ -19,6 +20,7 @@
             getMarkerPosition: getMarkerPosition, //return promise.all [arr, map]
             iconCreate: iconCreate, //return L.icon
             setActive: setActive, //void
+            getMarker: getMarker, //return [L.marker, ...]
             arrIcon: arrIcon, // [L.icon, ...]
             getPoly: getPoly, //return [L.polyline, ...]
             reset: reset // void
@@ -34,7 +36,8 @@
                     var response = [
                         [49, 26],
                         [50, 29],
-                        [48, 34]
+                        [48, 34],
+                        [50, 33]
                     ];
                     for(var i=0; i<response.length; i++){
                         arrMarkerOption.push(response[i])
@@ -58,18 +61,33 @@
 
         function getPoly(position){
             removePoly();
-            angular.forEach(arrMarkerOption, function(opt){
-                if(opt!=position){
-                    arrPoly.push(  L.polyline([ position, opt ], {snakingSpeed: 1000}).bindLabel('Even polylines can have labels.')      ) ;
+            angular.forEach(arrMarker, function(marker){
+                if(marker.position!=position){
+                    arrPoly.push(  L.polyline([ position, marker.position ], {snakingSpeed: 1000}).bindLabel('Even polylines can have labels.')      ) ;
                 }
             });
             return arrPoly;
         }
 
+        function getMarker(scope, arrPosition){
+
+            angular.forEach(arrPosition, function(position){
+                var _scope  = scope.$new();
+                var icon = iconCreate(_scope, position)
+                arrMarker.push({
+                    body:  L.marker(position, {icon: icon}),
+                    icon: icon,
+                    position: position,
+                    scope: _scope
+                })
+            });
+
+            return arrMarker
+
+        }
 
 
-        function iconCreate(scope, position){
-            var _scope = scope.$new();
+        function iconCreate(_scope, position){
             _scope.position = position;
             var template = '<div class="table" ng-click="clickMarker(position)" lf-icon >' +
                 '<div class="table-cell">' +
@@ -82,11 +100,6 @@
                 html: content[0],
                 iconSize: L.point(50, 50)
             });
-            arrIcon.push({
-                position: position,
-                icon: icon,
-                scope: _scope
-            });
             return icon;
         }
 
@@ -96,22 +109,19 @@
          * @param scope
          */
         function setActive(scope){
-            var i = 0;
-            while(i<arrIcon.length){
-                if(arrIcon[i].scope == scope){
-                    arrIcon[i].scope.cssClass = 'active'
-                }else{
-                    arrIcon[i].scope.cssClass = null;
-                }
-                i++;
-            }
-            i = null;
+           angular.forEach(arrMarker, function(marker){
+               if(marker.scope == scope){
+                   marker.scope.cssClass = 'active'
+               }else{
+                   marker.scope.cssClass = null
+               }
+           });
         }
 
         function reset(){
             removePoly();
-            angular.forEach(arrIcon, function(icon){
-                icon.scope.cssClass = null
+            angular.forEach(arrMarker, function(marker){
+                marker.scope.cssClass = null
             })
         }
     }
