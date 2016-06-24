@@ -5,9 +5,9 @@
     angular.module('leaflet')
         .factory('factoryLoadScript', factoryLoadScript)
 
-    factoryLoadScript.$inject = ['$http', '$q', 'l'];
+    factoryLoadScript.$inject = ['$q', 'l'];
 
-    function factoryLoadScript($http, $q, l) {
+    function factoryLoadScript($q, l) {
         var defer = null;
 
         return {
@@ -82,9 +82,14 @@
         }
 
         function create(){
-            loadAsync(getCssHref(l.srcLib), function(){
+            /**
+             * Подгрузка css
+             */
+            loadAsync(getCssHref(l.srcLib));
 
-            });
+            /**
+             * подгрузка js
+             */
             loadSync(l.srcLib, success);
             function success(){
                 defer.resolve();
