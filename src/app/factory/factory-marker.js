@@ -59,7 +59,7 @@
                         arrMarkerOption.push(response[i])
                     }
                     return arrMarkerOption
-                }, 1000),
+                }, 500),
                 factoryLeafletMap
                     .getMap().then(function(_map){
                     map = _map;
