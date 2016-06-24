@@ -11,10 +11,11 @@
             var width = null,
                 height = null,
 
-                srcLib = {
+                srcLib= null, // array
+               /* srcLib = {
                     js: null,
                     css: null
-                },
+                },*/
                 startCenter = {
                     lat: null,
                     lng: null
@@ -35,8 +36,11 @@
                     return this;
                 },
                 setSrcLib: function(src){
-                    srcLib.js = src.js;
-                    srcLib.css = src.css;
+
+                    srcLib = src;
+
+                 /*   srcLib.js = src.js;
+                    srcLib.css = src.css;*/
                     return this;
                 },
                 setStartCenter: function(position){
