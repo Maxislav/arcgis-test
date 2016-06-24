@@ -15,6 +15,9 @@
 
         var scope = this;
 
+        /**
+         * Инициализация после загрузки скриптов.
+         */
         factoryMarker.getMarkerPosition()
             .then(function (d) {
                 arrPosition = d[0];
