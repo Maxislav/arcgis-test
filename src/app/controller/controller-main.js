@@ -7,9 +7,9 @@
     angular.module('app')
         .controller('controllerMain', controllerMain);
 
-    controllerMain.$inject = ['$scope','factoryMarker'];
+    controllerMain.$inject = ['$scope','factoryMarker', 'factoryLeafletMap'];
 
-    function controllerMain( $scope, factoryMarker) {
+    function controllerMain( $scope, factoryMarker, factoryLeafletMap) {
         var map = null;
         var arrPosition = null;
 
@@ -40,11 +40,11 @@
         }
 
         function mamOnClick(){
-            map.on('click', function(e){
+            factoryLeafletMap.mapOnClick(function(e){
                 if(!angular.element(e.originalEvent.toElement).hasClass('arc')){
                     factoryMarker.reset()
                 }
-            })
+            });
         }
     }
 }());

@@ -6,53 +6,53 @@
  */
 (function () {
 
-    /**
-     *
-     */
+
     angular.module('app')
-        .config(function (lProvider) {
-            lProvider
-                .setSrcLib(
-                    /**
-                     * подгрузка скриптов библиотеки
-                    */
-                    //синхронно
-                    [
+        .config(config);
 
-                        [
-                            {
-                                css: 'src/lib/leaflet/leaflet.css',
-                                js: 'src/lib/leaflet/leaflet-src.js'
-                            }
-                        ],
-                        [
-                            //асинхронно
-                            {
-                                js: 'src/lib/leaflet/leaflet-polyline-snake-anim.js'
-                            },
-                            {
-                                js: 'src/lib/leaflet/leaflet.label.js',
-                                css: 'src/lib/leaflet/leaflet.label.css'
-                            }
-                        ]
-                    ]
+    config.$inject = ['lProvider']
+    function config(lProvider) {
+        lProvider
+            .setSrcLib(
+            /**
+             * подгрузка скриптов библиотеки
+             */
 
-                )
-                /**
-                 * Размер карты
-                 */
-                .setMapSize({
-                    width: '1000px',
-                    height: '500px'
-                })
-                /**
-                 * Центр карты при старте
-                 */
-                .setStartCenter({
-                    lat: 50.1,
-                    lng: 30.2
-                })
+            [
+                //синхронно
+                [
+                    {
+                        css: 'src/lib/leaflet/leaflet.css',
+                        js: 'src/lib/leaflet/leaflet-src.js'
+                    }
+                ],
+                [
+                    //асинхронно
+                    {
+                        js: 'src/lib/leaflet/leaflet-polyline-snake-anim.js'
+                    },
+                    {
+                        js: 'src/lib/leaflet/leaflet.label.js',
+                        css: 'src/lib/leaflet/leaflet.label.css'
+                    }
+                ]
+            ]
+        )
+        /**
+         * Размер карты
+         */
+            .setMapSize({
+                width: '1000px',
+                height: '500px'
+            })
+        /**
+         * Центр карты при старте
+         */
+            .setStartCenter({
+                lat: 50.1,
+                lng: 30.2
+            })
 
-        })
+    }
 
 }());

@@ -15,7 +15,7 @@
             require: '^mapContainer',
             link: function (scope, el, attr, cntrl) {
                 //cntrl.setMap(el);
-                factoryLeafletMap.initMap(el);
+                factoryLeafletMap.initMap(el, scope);
                 el[0].style.width = '100%';
                 el[0].style.height = '100%';
             }

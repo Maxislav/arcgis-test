@@ -14,9 +14,13 @@
         var map = null,
             mapEl = null,
             promise = null,
-        deferGetMap = null;
+        deferGetMap = null,
+            scopeMap =null;
 
         return {
+
+            mapOnClick: mapOnClick, //void
+            maOffClick: maOffClick, // void
             initMap: initMap, //foo promise,
             getMap: getMap, // foo promise
             map: map //l.map
@@ -29,8 +33,9 @@
             return deferGetMap.promise
         }
 
-        function initMap(el) {
+        function initMap(el, scope) {
             if (!promise) {
+                scopeMap = scopeMap || scope;
                 promise = $q(function (resolve, reject) {
                     factoryLoadScript
                         .load()
@@ -58,6 +63,20 @@
             return promise;
         }
 
+        function mapOnClick(foo){
+            this.foo = foo;
+            var click = mapClick.bind(this);
+            map.on('click', click);
+        }
+
+        function maOffClick(){
+            map.off('click', mapClick);
+        }
+
+        function mapClick(e){
+            this.foo && this.foo(e);
+            scopeMap.$digest();
+        }
 
     }
 }());
