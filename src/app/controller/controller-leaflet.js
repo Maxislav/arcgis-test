@@ -46,8 +46,9 @@
             });
         }
         $scope.$on('$destroy', function(){
-            factoryMarker.reset();
-            factoryMarker.destroyMarker()
+
+            factoryMarker.destroyMarker();
+            factoryMapEvents.mapOffClick();
         })
     }
 }());

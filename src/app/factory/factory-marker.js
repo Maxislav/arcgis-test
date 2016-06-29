@@ -166,6 +166,7 @@
         }
 
         function destroyMarker(){
+            reset();
             while (arrMarker.length){
                 arrMarker.splice(0,1);
             }

@@ -34,7 +34,7 @@
             initMoveEvent: initMoveEvent,
             mousePosition: mousePosition,
             mapOnClick: mapOnClick, //void
-            maOffClick: maOffClick // void
+            mapOffClick: mapOffClick // void
         };
 
 
@@ -47,11 +47,11 @@
             });
             factoryLeafletMap.getMap()
                 .then(function(map){
-                    map.on('click', click);
+                    map.on('click', click );
                 });
         }
 
-        function maOffClick(foo) {
+        function mapOffClick(foo) {
             factoryLeafletMap.getMap().then(function(map){
                 if (foo) {
                     map.off('click', objFooEvent[foo.__id]);
