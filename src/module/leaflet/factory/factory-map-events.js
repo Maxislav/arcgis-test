@@ -15,10 +15,11 @@
             idFoo = 0;
 
         return {
-            destroy: destroy,
-            mapOnMouseMove: mapOnMouseMove,
+
+            mapOnMouseMove: mapOnMouseMove, //void
+            mapOffClick: mapOffClick, // void
             mapOnClick: mapOnClick, //void
-            mapOffClick: mapOffClick // void
+            destroy: destroy //void
         };
 
 
@@ -51,8 +52,6 @@
             this.foo && this.foo(e);
             this.$scope && this.$scope.$digest();
         }
-
-
 
         function mapOnClick(foo) {
             foo.__id = idFoo;

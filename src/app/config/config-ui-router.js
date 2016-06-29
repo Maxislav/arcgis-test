@@ -25,7 +25,12 @@
             .state('arcgis', {
                 url: '/arcgis',
                 templateUrl: 'src/app/template/arcgis.html',
-                controller: 'controllerArcgis'
+                controller: 'controllerArcgis',
+                resolve: {
+                    $loadScript: function(factoryLoadScript){
+                        return factoryLoadScript.load();
+                    }
+                }
             })
     }
 }());

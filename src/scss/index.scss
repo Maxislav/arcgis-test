@@ -10,8 +10,15 @@ body{
   font-family: Geneva, Arial, Helvetica, sans-serif;
   background: gray;
 }
+.arcgis-map-container{
+  #viewDiv.arcgis-map{
+    margin: 0 auto;
+    width: 1000px;
+    height: 500px;
+  }
+}
 
-.map-container{
+.map-container, {
   margin: 0 auto;
   position: relative;
   .lf-map{
