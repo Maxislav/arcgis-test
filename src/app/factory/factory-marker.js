@@ -17,7 +17,9 @@
 
 
         return {
+
             getMarkerPosition: getMarkerPosition, //return promise.all [arr, map]
+            destroyMarker: destroyMarker,
             iconCreate: iconCreate, //return L.icon
             setActive: setActive, //void
             getMarker: getMarker, //return [L.marker, ...]
@@ -55,6 +57,7 @@
                             latLng: [47.8, 35.2]
                         }
                     ];
+                    arrMarkerOption.length = 0;
                     for(var i=0; i<response.length; i++){
                         arrMarkerOption.push(response[i])
                     }
@@ -160,6 +163,12 @@
                }
                 map.addLayer(marker.popup);
            });
+        }
+
+        function destroyMarker(){
+            while (arrMarker.length){
+                arrMarker.splice(0,1);
+            }
         }
 
         function reset(){

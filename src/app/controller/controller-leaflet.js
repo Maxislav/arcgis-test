@@ -45,5 +45,9 @@
                 }
             });
         }
+        $scope.$on('$destroy', function(){
+            factoryMarker.reset();
+            factoryMarker.destroyMarker()
+        })
     }
 }());

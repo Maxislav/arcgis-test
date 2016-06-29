@@ -21,11 +21,10 @@
 
         function initMoveEvent(scope) {
             factoryLeafletMap.getMap().then(function (_map) {
-                map = map || _map;
                 _map.on('mousemove', function (e) {
                     mousePosition.lat = e.latlng.lat;
                     mousePosition.lng = e.latlng.lng;
-                    scope.$digest()
+                    _map.$scope.$digest()
                 });
 
             })
@@ -47,7 +46,7 @@
                 foo: foo
             });
             factoryLeafletMap.getMap()
-                .then(function(){
+                .then(function(map){
                     map.on('click', click);
                 });
         }
@@ -65,7 +64,9 @@
 
         function mapClick(e) {
             this.foo && this.foo(e);
-            factoryLeafletMap.getScope().$digest();
+            factoryLeafletMap.getMap().then(function(map){
+
+            })
         }
     }
 

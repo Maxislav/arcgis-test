@@ -13,55 +13,33 @@
         var map = null,
             mapEl = null,
             promise = null,
-        deferGetMap = null,
-            scopeMap =null;
+            deferGetMap = null,
+            scopeMap = null;
 
         return {
-
+            destroyMap: destroyMap,
             getScope: getScope, // return scopeMAp
             initMap: initMap, //foo promise,
             getMap: getMap, // foo promise
             map: map //l.map
         };
 
-        function getMap(){
+        function getMap() {
             if(!deferGetMap){
                 deferGetMap = $q.defer();
             }
             return deferGetMap.promise
         }
 
-        function initMap(el, scope) {
-            if (!promise) {
-                scopeMap = scopeMap || scope;
-                promise = $q(function (resolve, reject) {
-                    factoryLoadScript
-                        .load()
-                        .then(
-                            function () {
-                                map = L.map(el[0], {closePopupOnClick:false }).setView([l.startCenter.lat, l.startCenter.lng], 6);
-                                mapEl = el;
-                                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
-                                    maxZoom: 18,
-                                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                                    id: 'mapbox.streets'
-                                }).addTo(map);
-
-                                if(!deferGetMap){
-                                    deferGetMap = $q.defer();
-                                }
-                                deferGetMap.resolve(map);
-                                resolve(map)
-                            }
-                        );
-                })
-            }
-            return promise;
+        function initMap(map) {
+            deferGetMap.resolve(map);
         }
 
-        function getScope(){
+        function destroyMap(){
+            deferGetMap = null;
+        }
+
+        function getScope() {
             return scopeMap;
         }
     }
