@@ -10,12 +10,13 @@
     factoryLeafletMap.$inject = ['$q', 'factoryLoadScript', 'l'];
 
     function factoryLeafletMap($q, factoryLoadScript, l) {
-
         var map = null,
             mapEl = null,
             promise = null,
         deferGetMap = null,
-            scopeMap =null;
+            scopeMap =null,
+            objFooEvent = {},
+            idFoo = 0;
 
         return {
 
@@ -64,13 +65,22 @@
         }
 
         function mapOnClick(foo){
-            this.foo = foo;
-            var click = mapClick.bind(this);
+            foo.__id = idFoo;
+            objFooEvent[idFoo] = foo;
+            idFoo++;
+            var click = mapClick.bind({
+                foo: foo
+            });
             map.on('click', click);
         }
 
-        function maOffClick(){
-            map.off('click', mapClick);
+        function maOffClick(foo){
+            if(foo){
+                map.off('click', objFooEvent[foo.__id]);
+                delete objFooEvent[foo.__id]
+            }else {
+                map.off('click');
+            }
         }
 
         function mapClick(e){
