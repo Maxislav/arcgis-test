@@ -5,7 +5,7 @@
     'use strict';
 
     angular.module('leaflet')
-        .directive('infoLatLng', infoLatLng);
+        .directive('leafletInfoLatLng', infoLatLng);
 
     infoLatLng.$inject =['factoryMapEvents'];
     function infoLatLng(factoryMapEvents){

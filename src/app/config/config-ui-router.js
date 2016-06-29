@@ -15,7 +15,7 @@
             .state('leaflet', {
                 url: '/leaflet',
                 templateUrl: 'src/app/template/leaflet.html',
-                controller: 'controllerMain',
+                controller: 'controllerLeaflet',
                 resolve: {
                     $loadScript: function(factoryLoadScript){
                         return factoryLoadScript.load();
@@ -24,7 +24,8 @@
             })
             .state('arcgis', {
                 url: '/arcgis',
-                templateUrl: 'src/app/template/arcgis.html'
+                templateUrl: 'src/app/template/arcgis.html',
+                controller: 'controllerArcgis'
             })
     }
 }());

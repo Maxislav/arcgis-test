@@ -5,11 +5,11 @@
     'use strict';
 
     angular.module('app')
-        .controller('controllerMain', controllerMain);
+        .controller('controllerLeaflet', controllerLeaflet);
 
-    controllerMain.$inject = ['$scope','factoryMarker', 'factoryMapEvents'];
+    controllerLeaflet.$inject = ['$scope','factoryMarker', 'factoryMapEvents'];
 
-    function controllerMain( $scope, factoryMarker, factoryMapEvents) {
+    function controllerLeaflet( $scope, factoryMarker, factoryMapEvents) {
         var map = null;
         var arrPosition = null;
 
