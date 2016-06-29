@@ -4,7 +4,7 @@
 
 module.exports = function(gulp){
     gulp.task('copy', function() {
-        gulp.src('./bower_components/angular/angular.min.js')
+        gulp.src(['./bower_components/angular/angular.min.js', './bower_components/angular-ui-router/release/angular-ui-router.min.js'])
             .pipe(gulp.dest('./src/lib/angular'));
 
     });

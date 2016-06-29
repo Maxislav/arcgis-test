@@ -4,5 +4,10 @@
 
 (function(){
     "use strict";
-    angular.module('app', ['leaflet'])
+    angular.module('app', [
+        'ui.router',
+        'charger',
+        'leaflet',
+        'arcgis'
+    ])
 }());

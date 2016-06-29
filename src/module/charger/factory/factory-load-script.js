@@ -1,20 +1,27 @@
 /**
- * Created by maxim on 6/21/16.
+ * Created by mars on 6/29/16.
  */
-(function () {
-    angular.module('leaflet')
-        .factory('factoryLoadScript', factoryLoadScript)
 
-    factoryLoadScript.$inject = ['$q', 'l'];
+(function () {
+    'use strict';
+
+    angular.module('charger')
+
+        .factory('factoryLoadScript', factoryLoadScript);
+
+    factoryLoadScript.$inject = ['$q', 'ch'];
 
     function factoryLoadScript($q, l) {
         var defer = null;
+
 
         return {
             load: load // promise
         };
 
         function load() {
+
+
             if (!defer) {
                 defer = $q.defer();
                 create();
@@ -23,35 +30,35 @@
         }
 
 
-        function loadSync(arr, callback){
-            if(arr.length){
-                loadAsync(arr[0], function(){
-                    arr.splice(0,1);
+        function loadSync(arr, callback) {
+            if (arr.length) {
+                loadAsync(arr[0], function () {
+                    arr.splice(0, 1);
                     loadSync(arr, callback)
                 });
-            }else {
+            } else {
                 callback && callback();
             }
         }
 
-        function loadAsync(arr, callback){
+        function loadAsync(arr, callback) {
             var countNeeded = arr.length, c = 0;
-            angular.forEach(arr, function(a, i){
-                if(angular.isObject(a)){
+            angular.forEach(arr, function (a, i) {
+                if (angular.isObject(a)) {
                     a = a.js
                 }
-                switch (true){
+                switch (true) {
                     case /^.+\.css$/.test(a):
                         var link = document.createElement('link');
-                        link.rel= "stylesheet";
+                        link.rel = "stylesheet";
                         link.href = a;
                         document.head.appendChild(link);
                         resolve();
                         break;
                     case /^.+\.js$/.test(a):
-                        (function(){
+                        (function () {
                             var script = document.createElement('script');
-                            script.onload = function(){
+                            script.onload = function () {
                                 resolve();
                             };
                             script.src = a;
@@ -60,28 +67,27 @@
                         break
                 }
             });
-            function resolve(){
+            function resolve() {
                 c++;
-                if(countNeeded == c){
+                if (countNeeded == c) {
                     callback && callback();
                 }
             }
         }
 
-
-        function getCssHref(arr, cssHref){
+        function getCssHref(arr, cssHref) {
             var _cssHref = cssHref || [];
-            angular.forEach(arr, function(p){
-                if(angular.isArray(p)){
-                    _cssHref =  getCssHref(p, _cssHref)
-                }else{
+            angular.forEach(arr, function (p) {
+                if (angular.isArray(p)) {
+                    _cssHref = getCssHref(p, _cssHref)
+                } else {
                     p.css && _cssHref.push(p.css);
                 }
             });
             return _cssHref
         }
 
-        function create(){
+        function create() {
             /**
              * Подгрузка css
              */
@@ -91,7 +97,7 @@
              * подгрузка js
              */
             loadSync(l.srcLib, success);
-            function success(){
+            function success() {
                 defer.resolve();
             }
         }

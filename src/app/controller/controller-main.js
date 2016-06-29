@@ -7,9 +7,9 @@
     angular.module('app')
         .controller('controllerMain', controllerMain);
 
-    controllerMain.$inject = ['$scope','factoryMarker', 'factoryLeafletMap', 'factoryMapEvents'];
+    controllerMain.$inject = ['$scope','factoryMarker', 'factoryMapEvents'];
 
-    function controllerMain( $scope, factoryMarker, factoryLeafletMap, factoryMapEvents) {
+    function controllerMain( $scope, factoryMarker, factoryMapEvents) {
         var map = null;
         var arrPosition = null;
 
@@ -25,7 +25,6 @@
                 mamOnClick();
                 setMarkers.apply(scope, d);
             });
-
 
         $scope.drawPoly = function(scope){
             angular.forEach(factoryMarker.getPoly(scope), function(poly){

@@ -6,30 +6,33 @@
     <link data-css-type="custom-theme" rel="stylesheet" href="build/css/index.css">
     
     <script src="src/lib/angular/angular.min.js"></script>
+    <script src="src/lib/angular/angular-ui-router.min.js"></script>
     <script src="src/app/init.js"></script>
+    <script src="src/module/arcgis/init.js"></script>
+    <script src="src/module/charger/init.js"></script>
     <script src="src/module/leaflet/init.js"></script>
+    <script src="src/app/config/config-charger.js"></script>
     <script src="src/app/config/config-leaflet.js"></script>
+    <script src="src/app/config/config-ui-router.js"></script>
     <script src="src/app/controller/controller-main.js"></script>
     <script src="src/app/directive/directive-lf-icon.js"></script>
     <script src="src/app/factory/factory-marker.js"></script>
     <script src="src/app/factory/factory-poly.js"></script>
+    <script src="src/module/charger/factory/factory-load-script.js"></script>
+    <script src="src/module/charger/provider/provider-ch.js"></script>
     <script src="src/module/leaflet/controller/conroller-map-container.js"></script>
     <script src="src/module/leaflet/directive/directive-info-lat-lng.js"></script>
     <script src="src/module/leaflet/directive/directive-map-container.js"></script>
     <script src="src/module/leaflet/directive/directive-map.js"></script>
-    <script src="src/module/leaflet/factory/factory-load-script.js"></script>
     <script src="src/module/leaflet/factory/factory-map-events.js"></script>
     <script src="src/module/leaflet/factory/factrory-leaflet-map.js"></script>
     <script src="src/module/leaflet/provider/provider-leaflet.js"></script>
     
   </head>
-  <body ng-controller="controllerMain">
+  <body>
     <div class="table">
       <div class="table-cell">
-        <div class="map-container">
-          <div class="lf-map"></div>
-          <div class="info-lat-lng"></div>
-        </div>
+        <div ui-view=""></div>
       </div>
     </div>
   </body>

@@ -23,8 +23,16 @@ module.exports = function(gulp){
                     pretty: true
                 }))
                 .pipe(gulp.dest('./src/module/leaflet/template/'))
-                .pipe( livereload() );
+                .pipe( livereload()),
 
-        return  merge(a, b)
+            c =  gulp.src('./src/app/template-jade/**/*.jade')
+                .pipe(jade({
+                    locals: YOUR_LOCALS,
+                    pretty: true
+                }))
+                .pipe(gulp.dest('./src/app/template/'))
+                .pipe( livereload());
+
+        return  merge(a, b, c)
     });
 };
