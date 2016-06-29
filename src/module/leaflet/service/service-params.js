@@ -6,5 +6,9 @@
       .service('serviceParams', serviceParams)
     function serviceParams(){
         this.mapEl = null;
+        this.mousePosition = {
+            lat: null,
+            lng: null
+        }
     }
 }());

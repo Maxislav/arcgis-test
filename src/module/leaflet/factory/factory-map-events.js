@@ -11,42 +11,60 @@
 
     function factoryMapEvents(factoryLeafletMap) {
 
-        var mousePosition = {
-                lat: null,
-                lng: null
-            },
-            map,
-            objFooEvent = {},
+        var objFooEvent = {},
             idFoo = 0;
 
-        function initMoveEvent(scope) {
-            factoryLeafletMap.getMap().then(function (_map) {
-                _map.on('mousemove', function (e) {
-                    mousePosition.lat = e.latlng.lat;
-                    mousePosition.lng = e.latlng.lng;
-                    _map.$scope.$digest()
-                });
-
-            })
-        }
-
         return {
-            initMoveEvent: initMoveEvent,
-            mousePosition: mousePosition,
+            destroy: destroy,
+            mapOnMouseMove: mapOnMouseMove,
             mapOnClick: mapOnClick, //void
             mapOffClick: mapOffClick // void
         };
+
+
+        function mapOnMouseMove(foo){
+            foo.__id = idFoo;
+            objFooEvent[idFoo] = foo;
+            idFoo++;
+            factoryLeafletMap.getMap()
+                .then(function(map){
+                    var mousemove = mouseMove.bind({
+                        foo: foo,
+                        $scope: map.$scope
+                    });
+                    map.on('mousemove', mousemove);
+                });
+        }
+
+        function mapOffMouseMove(foo){
+            factoryLeafletMap.getMap().then(function(map){
+                if (foo) {
+                    map.off('mousemove', objFooEvent[foo.__id]);
+                    delete objFooEvent[foo.__id]
+                } else {
+                    map.off('mousemove');
+                }
+            })
+        }
+
+        function  mouseMove(e){
+            this.foo && this.foo(e);
+            this.$scope && this.$scope.$digest();
+        }
+
 
 
         function mapOnClick(foo) {
             foo.__id = idFoo;
             objFooEvent[idFoo] = foo;
             idFoo++;
-            var click = mapClick.bind({
-                foo: foo
-            });
+
             factoryLeafletMap.getMap()
                 .then(function(map){
+                    var click = mapClick.bind({
+                        foo: foo,
+                        $scope: map.$scope
+                    });
                     map.on('click', click );
                 });
         }
@@ -62,11 +80,14 @@
             })
         }
 
+        function destroy(){
+            mapOffClick();
+            mapOffMouseMove();
+        }
+
         function mapClick(e) {
             this.foo && this.foo(e);
-            factoryLeafletMap.getMap().then(function(map){
-
-            })
+            this.$scope && this.$scope.$digest();
         }
     }
 

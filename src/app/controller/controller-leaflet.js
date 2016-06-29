@@ -7,9 +7,9 @@
     angular.module('app')
         .controller('controllerLeaflet', controllerLeaflet);
 
-    controllerLeaflet.$inject = ['$scope','factoryMarker', 'factoryMapEvents'];
+    controllerLeaflet.$inject = ['$scope','factoryMarker', 'factoryMapEvents', 'serviceParams'];
 
-    function controllerLeaflet( $scope, factoryMarker, factoryMapEvents) {
+    function controllerLeaflet( $scope, factoryMarker, factoryMapEvents, serviceParams) {
         var map = null;
         var arrPosition = null;
 
@@ -23,6 +23,7 @@
                 arrPosition = d[0];
                 map = d[1];
                 mamOnClick();
+                mopOnMouseMove();
                 setMarkers.apply(scope, d);
             });
 
@@ -45,10 +46,19 @@
                 }
             });
         }
-        $scope.$on('$destroy', function(){
 
+        function mopOnMouseMove(){
+            factoryMapEvents.mapOnMouseMove(function(e){
+                serviceParams.mousePosition.lat =  e.latlng.lat;
+                serviceParams.mousePosition.lng =  e.latlng.lng
+            })
+        }
+
+        $scope.$on('$destroy', function(){
+            serviceParams.mousePosition.lat =  null;
+            serviceParams.mousePosition.lng =  null;
             factoryMarker.destroyMarker();
-            factoryMapEvents.mapOffClick();
+            factoryMapEvents.destroy();
         })
     }
 }());
