@@ -12,13 +12,17 @@
     function factoryMapEvents(factoryLeafletMap) {
 
         var mousePosition = {
-            lat: null,
-            lng: null
-        };
+                lat: null,
+                lng: null
+            },
+            map,
+            objFooEvent = {},
+            idFoo = 0;
 
         function initMoveEvent(scope) {
-            factoryLeafletMap.getMap().then(function (map) {
-                map.on('mousemove', function (e) {
+            factoryLeafletMap.getMap().then(function (_map) {
+                map = map || _map;
+                _map.on('mousemove', function (e) {
                     mousePosition.lat = e.latlng.lat;
                     mousePosition.lng = e.latlng.lng;
                     scope.$digest()
@@ -29,10 +33,40 @@
 
         return {
             initMoveEvent: initMoveEvent,
-            mousePosition: mousePosition
+            mousePosition: mousePosition,
+            mapOnClick: mapOnClick, //void
+            maOffClick: maOffClick // void
+        };
+
+
+        function mapOnClick(foo) {
+            foo.__id = idFoo;
+            objFooEvent[idFoo] = foo;
+            idFoo++;
+            var click = mapClick.bind({
+                foo: foo
+            });
+            factoryLeafletMap.getMap()
+                .then(function(){
+                    map.on('click', click);
+                });
         }
 
+        function maOffClick(foo) {
+            factoryLeafletMap.getMap().then(function(map){
+                if (foo) {
+                    map.off('click', objFooEvent[foo.__id]);
+                    delete objFooEvent[foo.__id]
+                } else {
+                    map.off('click');
+                }
+            })
+        }
 
+        function mapClick(e) {
+            this.foo && this.foo(e);
+            factoryLeafletMap.getScope().$digest();
+        }
     }
 
 }());

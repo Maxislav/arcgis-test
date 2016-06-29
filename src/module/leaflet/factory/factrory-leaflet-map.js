@@ -14,14 +14,11 @@
             mapEl = null,
             promise = null,
         deferGetMap = null,
-            scopeMap =null,
-            objFooEvent = {},
-            idFoo = 0;
+            scopeMap =null;
 
         return {
 
-            mapOnClick: mapOnClick, //void
-            maOffClick: maOffClick, // void
+            getScope: getScope, // return scopeMAp
             initMap: initMap, //foo promise,
             getMap: getMap, // foo promise
             map: map //l.map
@@ -64,29 +61,8 @@
             return promise;
         }
 
-        function mapOnClick(foo){
-            foo.__id = idFoo;
-            objFooEvent[idFoo] = foo;
-            idFoo++;
-            var click = mapClick.bind({
-                foo: foo
-            });
-            map.on('click', click);
+        function getScope(){
+            return scopeMap;
         }
-
-        function maOffClick(foo){
-            if(foo){
-                map.off('click', objFooEvent[foo.__id]);
-                delete objFooEvent[foo.__id]
-            }else {
-                map.off('click');
-            }
-        }
-
-        function mapClick(e){
-            this.foo && this.foo(e);
-            scopeMap.$digest();
-        }
-
     }
 }());
